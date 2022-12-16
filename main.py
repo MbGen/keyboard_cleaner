@@ -18,8 +18,6 @@ app = customtkinter.CTk()
 app.title("Keyboard cleaner")
 app.geometry("400x200")
 
-clear_mode = False
-
 def quit_window(tray_icon: icon, tray_item: menu_item) -> None:
     tray_icon.stop()
     app.destroy()

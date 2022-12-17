@@ -3,8 +3,6 @@ from pystray import Icon as icon, MenuItem as menu_item
 from PIL import Image 
 import keyboard
 
-customtkinter.set_appearance_mode("System")
-customtkinter.set_default_color_theme("blue")
 
 match customtkinter.get_appearance_mode():
     case "Light":
@@ -14,13 +12,8 @@ match customtkinter.get_appearance_mode():
         tray_icon_image = Image.open('icons/light_keyboard.png')
 
 
-app = customtkinter.CTk()
-app.title("Keyboard cleaner")
-app.geometry("400x200")
-
 def quit_window(tray_icon: icon, tray_item: menu_item) -> None:
     tray_icon.stop()
-    app.destroy()
 
 def disable_clear_mode(tray_icon: icon, tray_item: menu_item) -> None:
     if tray_icon.HAS_NOTIFICATION:
@@ -46,13 +39,11 @@ def enable_clear_mode(tray_icon: icon, tray_item: menu_item) -> None:
     for i in range(150):
         keyboard.block_key(i)
 
-def hide_window() -> None:
+def show_tray_menu() -> None:
     tray_menu = (menu_item('Enable clear mode', enable_clear_mode), menu_item('Quit', quit_window))
     tray_icon = icon('Tray image', tray_icon_image, 'Keyboard cleaner', tray_menu)
     tray_icon.run()
 
 
 if __name__ == "__main__":
-    app.wm_state(newstate='withdraw')
-    app.protocol('WM_DELETE_WINDOW', hide_window())
-    app.mainloop()
+    show_tray_menu()

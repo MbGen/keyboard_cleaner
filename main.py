@@ -47,3 +47,4 @@ def show_tray_menu() -> None:
 
 if __name__ == "__main__":
     show_tray_menu()
+

@@ -12,32 +12,42 @@ match customtkinter.get_appearance_mode():
         tray_icon_image = Image.open('icons/light_keyboard.png')
 
 
+def notify(tray_icon: icon, message: str) -> None:
+    if tray_icon.HAS_NOTIFICATION:
+        tray_icon.notify(message)
+
+
 def quit_window(tray_icon: icon, tray_item: menu_item) -> None:
     tray_icon.stop()
 
+
 def disable_clear_mode(tray_icon: icon, tray_item: menu_item) -> None:
-    if tray_icon.HAS_NOTIFICATION:
-        tray_icon.notify('Clear mode is diabled')
+    notify('Clear mode is disabled')
 
     tray_menu = (
         menu_item('Enable clear mode', enable_clear_mode),
         menu_item('Quit', quit_window)
     )
+
     tray_icon.menu = tray_menu
+
     for i in range(150):
         keyboard.unblock_key(i)
 
+
 def enable_clear_mode(tray_icon: icon, tray_item: menu_item) -> None:
-    if tray_icon.HAS_NOTIFICATION:
-        tray_icon.notify('Clear mode is enabled')
+    notify('Clear mode is enabled')
 
     tray_menu = (
         menu_item('Disable clear mode', disable_clear_mode), 
         menu_item('Quit', quit_window)
     )
+
     tray_icon.menu = tray_menu
+
     for i in range(150):
         keyboard.block_key(i)
+
 
 def show_tray_menu() -> None:
     tray_menu = (menu_item('Enable clear mode', enable_clear_mode), menu_item('Quit', quit_window))

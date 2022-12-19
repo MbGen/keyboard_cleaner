@@ -22,7 +22,7 @@ def quit_window(tray_icon: icon, tray_item: menu_item) -> None:
 
 
 def disable_clear_mode(tray_icon: icon, tray_item: menu_item) -> None:
-    notify('Clear mode is disabled')
+    notify(tray_icon, 'Clear mode is disabled')
 
     tray_menu = (
         menu_item('Enable clear mode', enable_clear_mode),
@@ -36,7 +36,7 @@ def disable_clear_mode(tray_icon: icon, tray_item: menu_item) -> None:
 
 
 def enable_clear_mode(tray_icon: icon, tray_item: menu_item) -> None:
-    notify('Clear mode is enabled')
+    notify(tray_icon, 'Clear mode is enabled')
 
     tray_menu = (
         menu_item('Disable clear mode', disable_clear_mode), 
